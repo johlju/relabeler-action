@@ -4,9 +4,12 @@ _Based on the template [typescript-action](https://github.com/actions/typescript
 
 ## Contribute
 
-Install the dependencies.
+Install the dependencies. If Node.js v14 is installed, install npm v7 manually,
+if Node.js v15 is installed npm v7 is already installed. If npm v7 is
+used peer dependencies are installed automatically.
 
 ```bash
+sudo npm i -g npm@7
 npm install
 ```
 
