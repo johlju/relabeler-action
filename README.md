@@ -22,11 +22,22 @@ Run the tests.
 npm test
 ```
 
+Run the tests and watch for changes.
+
+```bash
+npm run test:watch
+```
+
 Run the linter.
 
 ```bash
 npm run lint
 ```
+
+>**NOTE:** To see debug messages output from the job _Execute_ in a fork.
+>In the repository add the repository secrets `ACTIONS_RUNNER_DEBUG` and
+>`ACTIONS_STEP_DEBUG` and set each to the value `true`. See more information
+>in [Enabling debug logging](https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/enabling-debug-logging).]
 
 ## Distribute
 
