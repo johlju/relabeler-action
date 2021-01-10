@@ -1,0 +1,14 @@
+name: 'relabeler'
+description: 'A GitHub Action that is able to label issues and pull requests on events.'
+author: 'Viscalyx'
+inputs:
+  milliseconds: # change this
+    required: true
+    description: 'input description here'
+    default: 'default value if applicable'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'tag'
+  color: 'white'
