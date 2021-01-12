@@ -1,4 +1,4 @@
-name: 'relabeler'
+name: 'Relabeler'
 description: 'A GitHub Action that is able to label issues and pull requests on events.'
 author: 'Viscalyx'
 inputs:
