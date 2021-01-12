@@ -26,8 +26,10 @@ async function run(): Promise<void> {
     // Wrap an asynchronous function call in a foldable group
     const result = await core.group('Do the wait async in a group', async () => {
       wait(parseInt(ms, 10))
-      return
+      return 1
     })
+
+    core.info(`Returned ${result} from group`)
 
     if (core.isDebug()) {
       // curl -v https://github.com
@@ -39,7 +41,7 @@ async function run(): Promise<void> {
     // into inputs of other actions to ensure they are decoupled.
     core.setOutput('time', new Date().toTimeString())
   } catch (error) {
-    core.error(`Error ${error}, action may still succeed though, or not...`);
+    core.error(`Error ${error}, action may still succeed though, or not...`)
 
     // You should use this library to set the failing exit code for your action.
     // If status is not set and the script runs to completion, that will lead to a success.
