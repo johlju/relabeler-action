@@ -26,6 +26,7 @@ jobs:
           npm install
       - run: |
           npm run all
+
   Test: # run just the tests
     runs-on: ubuntu-latest
     strategy:
@@ -44,8 +45,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm test
-        env:
-          CI: true
+
   Execute: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     strategy:
@@ -56,12 +56,13 @@ jobs:
           - windows-latest
         node: [ '12', '14' ]
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup node v${{ matrix.node }}
+      - name: Checkout Repository Code
+        uses: actions/checkout@v2
+      - name: Setup Node v${{ matrix.node }}
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
-      - name: Execute Relabeler
+      - name: Execute Action Relabeler
         uses: ./
         with:
           milliseconds: 1200
