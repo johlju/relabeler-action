@@ -2,37 +2,6 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import { wait } from './wait'
 
-// Info:
-//
-// GitHub Actions toolkit packages:
-// https://github.com/actions/toolkit
-//
-// @actions/core:
-// https://www.npmjs.com/package/@actions/core
-//
-// @actions/github:
-// https://github.com/actions/toolkit/tree/main/packages/github#usage
-//
-// @octokit/webhooks:
-// https://www.npmjs.com/package/@octokit/webhooks#typescript
-// https://github.com/actions/toolkit/tree/main/packages/github#webhook-payload-typescript-definitions
-//
-// Workflow Triggers:
-// https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#on
-// https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#issues
-//
-// Contexts:
-// https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-//
-// Environment variables:
-// https://github.com/files-community/Files
-//
-// Better Error Reporting:
-// https://joelhooks.com/jest-and-github-actions
-//
-// BLogs that explains Step-By-Step and shows testing but using older versions so there has been breaking change. Also how to load entire section using getInput()
-// https://jeffrafter.com/working-with-github-actions/
-
 async function run(): Promise<void> {
   try {
     core.info('Running the action Relabeler')
