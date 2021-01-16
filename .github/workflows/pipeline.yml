@@ -66,4 +66,4 @@ jobs:
         uses: ./
         with:
           milliseconds: 1200
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          repositoryToken: ${{ secrets.GITHUB_TOKEN }}

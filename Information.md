@@ -28,7 +28,7 @@ Contexts:
 
 Environment variables:
 
-- https:github.com/files-community/Files
+- https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables
 
 Better Error Reporting:
 
@@ -41,3 +41,7 @@ Blogs that explains Step-By-Step and shows testing but using older versions so t
 Github workflow is automatically disabled after 60 days of repository inactivity
 
 - https:docs.github.com/en/free-pro-team@latest/actions/reference/usage-limits-billing-and-administration#disabling-and-enabling-workflows
+
+GitHub Webhooks events and payloads
+
+- https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/webhook-events-and-payloads#pushevent

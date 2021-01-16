@@ -1,10 +1,34 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { wait } from './wait'
+import {wait} from './wait'
 
 async function run(): Promise<void> {
   try {
-    core.info('Running the action Relabeler')
+    const dryRunMessage = 'dry-run: '
+    const isGitHubActions = process.env['GITHUB_ACTIONS']
+
+    let runningMessage = ''
+
+    if (!isGitHubActions) {
+      runningMessage = dryRunMessage
+    }
+
+    const gitHubActor = process.env['GITHUB_ACTOR']
+    if (gitHubActor) {
+      runningMessage = `${runningMessage}Running the action Relabeler due to generated event by user ${gitHubActor}`
+    } else {
+      runningMessage = `${runningMessage}Running the action Relabeler as an unknown user`
+    }
+
+    core.info(runningMessage)
+
+    if (github.context.payload.sender) {
+      const senderLogin = github.context.payload.sender.login
+
+      if (senderLogin) {
+        core.debug(`A push from ${senderLogin}!`)
+      }
+    }
 
     // Action inputs can be read with getInput
     const ms: string = core.getInput('milliseconds')
@@ -22,10 +46,13 @@ async function run(): Promise<void> {
     core.endGroup()
 
     // Wrap an asynchronous function call in a foldable group
-    const result = await core.group('Do the wait async in a group', async () => {
-      wait(parseInt(ms, 10))
-      return 1
-    })
+    const result = await core.group(
+      'Do the wait async in a group',
+      async () => {
+        wait(parseInt(ms, 10))
+        return 1
+      }
+    )
 
     core.info(`Returned ${result} from group`)
 
@@ -39,16 +66,38 @@ async function run(): Promise<void> {
     // into inputs of other actions to ensure they are decoupled.
     core.setOutput('time', new Date().toTimeString())
 
-    core.debug(`payload: ${github.context.payload.action}`)
-
     // This should be a token with access to your repository scoped in as a secret.
     // The YML workflow will need to set myToken with the GitHub Secret Token
     // myToken: ${{ secrets.GITHUB_TOKEN }}
     // https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret
-    const repoToken: string = core.getInput('repoToken')
+    const repositoryToken: string = core.getInput('repositoryToken')
 
     // Usage: https://github.com/actions/toolkit/tree/main/packages/github#usage
-    const octokit = github.getOctokit(repoToken)
+    const octokit = github.getOctokit(repositoryToken)
+
+    const nwo = process.env['GITHUB_REPOSITORY'] || '/'
+    const [owner, repo] = nwo.split('/')
+
+    core.debug(`action: ${github.context.payload.action}`)
+
+    if (
+      isGitHubActions &&
+      github.context.payload.issue &&
+      github.context.payload.action === 'opened'
+    ) {
+      const issue = github.context.payload.issue
+
+      const issueCommentResponse = await octokit.issues.createComment({
+        owner,
+        repo,
+        issue_number: issue.number,
+        body: 'Thank you for this issue!'
+      })
+
+      core.debug(
+        `Replied with thanks message: ${issueCommentResponse.data.url}`
+      )
+    }
 
     // const token = process.env['GITHUB_TOKEN']
     // if (!token) return
@@ -75,7 +124,7 @@ async function run(): Promise<void> {
     //   core.info(`The head commit is: ${pushPayload.head}`)
     // }
   } catch (error) {
-    core.error(`Error ${error}, action may still succeed though, or not...`)
+    //core.error(`Error ${error}, action may still succeed though, or not...`)
 
     // You should use this library to set the failing exit code for your action.
     // If status is not set and the script runs to completion, that will lead to a success.
@@ -84,3 +133,7 @@ async function run(): Promise<void> {
 }
 
 run()
+
+// Export function run as the default export.
+// This is not required but writing the tests are easier.
+export default run
