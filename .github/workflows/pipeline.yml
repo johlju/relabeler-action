@@ -20,6 +20,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Fetch tags for GitVersion
         run: git fetch --tags
+      - name: Fetch main for GitVersion
+        if: github.ref != 'refs/heads/main'
+        run: git branch --create-reflog main origin/main
       - name: GitVersion
         id: gitversion  # step id used as reference for output values
         uses: roryprimrose/rungitversion@master
