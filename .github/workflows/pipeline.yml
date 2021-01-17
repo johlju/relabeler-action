@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Fetch master for GitVersion
-        if: github.ref != 'refs/heads/master'
-        run: git branch --create-reflog master origin/master
+        if: github.ref != 'refs/heads/main'
+        run: git branch --create-reflog main origin/main
       - name: Fetch tags for GitVersion
         run: git fetch --tags
       - name: GitVersion
