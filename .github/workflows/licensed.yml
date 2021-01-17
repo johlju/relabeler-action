@@ -1,0 +1,24 @@
+name: "Licensed"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ main ]
+
+jobs:
+  License:
+    name: Check licenses
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
+      with:
+        version: 2.x
+    - run: npm install # Install your projects dependencies
+    - id: licensed
+      uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        workflow: branch
