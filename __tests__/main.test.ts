@@ -9,15 +9,15 @@ import * as Webhooks from '@octokit/webhooks'
 import run from '../src/main'
 
 describe('When calling action without mandatory parameters', () => {
-  it("Should call the method setFailed() once", async () => {
-      expect.assertions(2)
+  it('Should call the method setFailed() once', async () => {
+    expect.assertions(2)
 
-      const mockCoreSetFailed = jest.spyOn(core, 'setFailed')
+    const mockCoreSetFailed = jest.spyOn(core, 'setFailed')
 
-      await run()
+    await run()
 
-      expect(mockCoreSetFailed).toHaveBeenCalledTimes(1)
-      expect(mockCoreSetFailed).toHaveBeenCalledWith('milliseconds not a number')
+    expect(mockCoreSetFailed).toHaveBeenCalledTimes(1)
+    expect(mockCoreSetFailed).toHaveBeenCalledWith('milliseconds not a number')
   })
 
   // it('Should call the method setFailed() once', async () => {
@@ -54,7 +54,6 @@ describe('debug action debug messages', () => {
   })
 
   it('Should not throw an error and call the correct mock', async () => {
-
     const debugMock = jest.spyOn(core, 'debug')
 
     await run()
@@ -65,14 +64,15 @@ describe('debug action debug messages', () => {
 
 describe('When executing as a process', () => {
   // shows how the runner will run a javascript action with env / stdout protocol
-    it('Should not throw an error', () => {
-      process.env['INPUT_MILLISECONDS'] = '500'
-      process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
-      const np = process.execPath
-      const ip = path.join(__dirname, '..', 'lib', 'main.js')
-      const options: cp.ExecFileSyncOptions = {
-        env: process.env
-      }
-      console.log(cp.execFileSync(np, [ip], options).toString())
-    })
+  it('Should not throw an error', () => {
+    process.env['INPUT_MILLISECONDS'] = '500'
+    process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
+    const np = process.execPath
+    const ip = path.join(__dirname, '..', 'lib', 'main.js')
+    const options: cp.ExecFileSyncOptions = {
+      env: process.env
+    }
+    cp.execFileSync(np, [ip], options)
+    //console.log(cp.execFileSync(np, [ip], options).toString())
   })
+})
