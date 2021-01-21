@@ -3,6 +3,7 @@
         "REPOSITORYTOKEN",
         "Relabeler",
         "octokit",
+        "vercel",
         "viscalyx"
     ]
 }
