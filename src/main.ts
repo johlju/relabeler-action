@@ -5,7 +5,18 @@ import {wait} from './wait'
 async function run(): Promise<void> {
   try {
     const dryRunMessage = 'dry-run: '
+
+    // Always set to true when GitHub Actions is running the workflow.
+    // You can use this variable to differentiate when tests are being run
+    // locally or by GitHub Actions.
     const isGitHubActions = process.env['GITHUB_ACTIONS']
+
+    // The name of the webhook event that triggered the workflow.
+    const webHookEvent = process.env['GITHUB_EVENT_NAME']
+
+    // The path of the file with the complete webhook event payload.
+    // For example, /github/workflow/event.json.
+    //const webHookEventPath = process.env['GITHUB_EVENT_PATH']
 
     let runningMessage = ''
 
@@ -15,7 +26,7 @@ async function run(): Promise<void> {
 
     const gitHubActor = process.env['GITHUB_ACTOR']
     if (gitHubActor) {
-      runningMessage = `${runningMessage}Running the action Relabeler due to generated event by user ${gitHubActor}`
+      runningMessage = `${runningMessage}Running the action Relabeler due to generated event '${webHookEvent}' by user ${gitHubActor}`
     } else {
       runningMessage = `${runningMessage}Running the action Relabeler as an unknown user`
     }
