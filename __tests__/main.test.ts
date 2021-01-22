@@ -39,7 +39,8 @@ describe('debug action debug messages', () => {
     process.env['INPUT_MILLISECONDS'] = '500'
     process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
     process.env['GITHUB_EVENT_NAME'] = 'push'
-    process.env['GITHUB_EVENT_PATH'] = '/home/runner/work/_temp/_github_workflow/event.json'
+    process.env['GITHUB_EVENT_PATH'] =
+      '/home/runner/work/_temp/_github_workflow/event.json'
 
     // Mock the payload for event: push
     github.context.payload = {
