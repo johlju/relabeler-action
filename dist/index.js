@@ -43,19 +43,28 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const dryRunMessage = 'dry-run: ';
+            // Always set to true when GitHub Actions is running the workflow.
+            // You can use this variable to differentiate when tests are being run
+            // locally or by GitHub Actions.
             const isGitHubActions = process.env['GITHUB_ACTIONS'];
+            // The name of the webhook event that triggered the workflow.
+            const webHookEventName = process.env['GITHUB_EVENT_NAME'] || '';
+            // The path of the file with the complete webhook event payload.
+            // For example, /github/workflow/event.json.
+            const webHookEventPath = process.env['GITHUB_EVENT_PATH'] || '';
             let runningMessage = '';
             if (!isGitHubActions) {
                 runningMessage = dryRunMessage;
             }
             const gitHubActor = process.env['GITHUB_ACTOR'];
             if (gitHubActor) {
-                runningMessage = `${runningMessage}Running the action Relabeler due to generated event by user ${gitHubActor}`;
+                runningMessage = `${runningMessage}Running the action Relabeler due to generated event _${webHookEventName}_ by user _${gitHubActor}_.`;
             }
             else {
-                runningMessage = `${runningMessage}Running the action Relabeler as an unknown user`;
+                runningMessage = `${runningMessage}Running the action Relabeler due to generated event _${webHookEventName}_ as an unknown user.`;
             }
             core.info(runningMessage);
+            core.info(webHookEventPath);
             if (github.context.payload.sender) {
                 const senderLogin = github.context.payload.sender.login;
                 if (senderLogin) {
