@@ -58,10 +58,10 @@ function run() {
             }
             const gitHubActor = process.env['GITHUB_ACTOR'];
             if (gitHubActor) {
-                runningMessage = `${runningMessage}Running the action Relabeler due to generated event _${webHookEventName}_ by user _${gitHubActor}_.`;
+                runningMessage = `${runningMessage}Running the action Relabeler due to generated event '${webHookEventName}' by user @${gitHubActor}.`;
             }
             else {
-                runningMessage = `${runningMessage}Running the action Relabeler due to generated event _${webHookEventName}_ as an unknown user.`;
+                runningMessage = `${runningMessage}Running the action Relabeler due to generated event '${webHookEventName}' as an unknown user.`;
             }
             core.info(runningMessage);
             core.info(webHookEventPath);
