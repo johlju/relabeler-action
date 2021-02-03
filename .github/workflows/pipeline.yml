@@ -31,6 +31,7 @@ jobs:
         uses: roryprimrose/rungitversion@master
       - name: Output version values
         run: |
+          # These are also available as environment variables, e.g. GitVersion_Major, or GitVersion_NuGetVersionV2
           echo "Major: ${{ steps.gitversion.outputs.Major }}"
           echo "Minor: ${{ steps.gitversion.outputs.Minor }}"
           echo "Patch: ${{ steps.gitversion.outputs.Patch }}"
