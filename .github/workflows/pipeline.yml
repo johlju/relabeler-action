@@ -29,8 +29,9 @@ jobs:
       - name: GitVersion
         id: gitversion  # step id used as reference for output values
         uses: roryprimrose/rungitversion@master
-      - name: Output version values 
+      - name: Output version values
         run: |
+          # These are also available as environment variables, e.g. GitVersion_Major, or GitVersion_NuGetVersionV2
           echo "Major: ${{ steps.gitversion.outputs.Major }}"
           echo "Minor: ${{ steps.gitversion.outputs.Minor }}"
           echo "Patch: ${{ steps.gitversion.outputs.Patch }}"
@@ -66,7 +67,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
+          npm install --global npm
           npm install
+          echo $GitVersion_NuGetVersionV2
       - run: |
           npm run all
 
@@ -85,7 +88,9 @@ jobs:
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install
+      - run: |
+          npm install --global npm
+          npm install
       - run: npm run build
       - run: npm test
 
