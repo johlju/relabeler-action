@@ -9,7 +9,7 @@ if Node.js v15 is installed npm v7 is already installed. If npm v7 is
 used peer dependencies are installed automatically.
 
 ```bash
-sudo npm i -g npm@7
+sudo npm install --global npm
 npm install
 ```
 
@@ -84,7 +84,7 @@ git push origin v1 --force # Force push the new or updated tag
 # Checkout the existing release branch
 git checkout releases/v1
 
-# Get all changes from default branch 
+# Get all changes from default branch
 git rebase origin/main
 
 # Build the release
