@@ -29,7 +29,7 @@ jobs:
       - name: GitVersion
         id: gitversion  # step id used as reference for output values
         uses: roryprimrose/rungitversion@master
-      - name: Output version values 
+      - name: Output version values
         run: |
           echo "Major: ${{ steps.gitversion.outputs.Major }}"
           echo "Minor: ${{ steps.gitversion.outputs.Minor }}"
@@ -66,6 +66,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
+          npm install --global npm
           npm install
       - run: |
           npm run all
