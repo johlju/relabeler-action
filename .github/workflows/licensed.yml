@@ -3,20 +3,28 @@ name: "Licensed"
 on:
   push:
     branches:
+    - 'main'
     - 'releases/*'
+  pull_request:
+    branches:
+    - 'main'
 
 jobs:
   License:
     name: Check licenses
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      fetch-depth: 0 # 0 indicates all history for all branches and tags
-    - uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # 0 indicates all history for all branches and tags
+    - name: Setup Licensed
+      uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
       with:
         version: 2.x
     - run: npm install # Install your projects dependencies
-    - id: licensed
+    - name: Setup Licensed
+      id: licensed
       uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
