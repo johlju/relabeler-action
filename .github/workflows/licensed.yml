@@ -11,7 +11,7 @@ on:
 
 jobs:
   License:
-    name: Check licenses
+    name: Valid licenses
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

@@ -8,6 +8,7 @@ on: # rebuild any PRs and main branch changes
 
 jobs:
   Build: # make sure build/ci work properly
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -69,6 +70,7 @@ jobs:
           npm run all
 
   Test: # run just the tests
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -89,7 +91,11 @@ jobs:
       - run: npm run build
       - run: npm test
 
-  Execute: # make sure the action works on a clean machine without building
+  # Make sure the action works on a clean machine without building.
+  # This should be run on branches Releases/* in the future and
+  # 'build run package' should have been run prior.
+  Execute:
+    name: Execute
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -105,6 +111,12 @@ jobs:
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: |
+          npm install --global npm
+          npm install
+      - name: Package
+        run: npm run package
       - name: Execute action Relabeler
         uses: ./
         with:
