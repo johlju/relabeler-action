@@ -22,10 +22,13 @@ jobs:
       uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
       with:
         version: 2.x
-    - run: npm install # Install your projects dependencies
+    - name: Install dependencies
+      run: |
+        npm install --global npm
+        npm install
     - name: Licensed
       id: licensed
-      uses: jonabc/licensed-ci@main # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
+      uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         workflow: branch
