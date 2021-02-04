@@ -18,17 +18,18 @@ jobs:
         node: [ '12', '14' ]
     steps:
       - uses: actions/checkout@v2
-      - name: Fetch tags for GitVersion
-        run: git fetch --tags
-      - name: Fetch main for GitVersion (if pull request)
-        if: github.ref != 'refs/heads/main'
-        run: git branch --create-reflog main origin/main
-      - name: Fetch unshallow for GitVersion (if default branch)
-        if: github.ref == 'refs/heads/main'
-        run: git fetch --unshallow
+        fetch-depth: 0 # 0 indicates all history for all branches and tags
+      # - name: Fetch tags for GitVersion
+      #   run: git fetch --tags
+      # - name: Fetch main for GitVersion (if pull request)
+      #   if: github.ref != 'refs/heads/main'
+      #   run: git branch --create-reflog main origin/main
+      # - name: Fetch unshallow for GitVersion (if default branch)
+      #   if: github.ref == 'refs/heads/main'
+      #   run: git fetch --unshallow
       - name: GitVersion
         id: gitversion  # step id used as reference for output values
-        uses: roryprimrose/rungitversion@master
+        uses: roryprimrose/rungitversion@v1
       - name: Output version values
         run: |
           # These are also available as environment variables, e.g. GitVersion_Major, or GitVersion_NuGetVersionV2
