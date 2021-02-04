@@ -23,7 +23,7 @@ jobs:
       with:
         version: 2.x
     - run: npm install # Install your projects dependencies
-    - name: Setup Licensed
+    - name: Licensed
       id: licensed
       uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
       with:
