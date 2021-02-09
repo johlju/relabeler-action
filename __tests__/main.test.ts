@@ -5,7 +5,12 @@ import * as path from 'path'
 
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import * as Webhooks from '@octokit/webhooks'
+//import * as Webhooks from '@octokit/webhooks'
+import {
+  //WebhookEvent,
+  PushEvent
+  //IssuesOpenedEvent
+} from '@octokit/webhooks-definitions/schema'
 import run from '../src/main'
 
 describe('When calling action without mandatory parameters', () => {
@@ -42,12 +47,39 @@ describe('debug action debug messages', () => {
     process.env['GITHUB_EVENT_PATH'] =
       '/home/runner/work/_temp/_github_workflow/event.json'
 
-    // Mock the payload for event: push
-    github.context.payload = {
-      sender: {
+    // Uses @octokit/webhooks-definitions for Type Script types for webhook events
+    // https://www.npmjs.com/package/@octokit/webhooks-definitions#importing-types
+    // const handleWebhookEvent = (event: WebhookEvent) => {
+    //   if ("action" in event && event.action === "completed") {
+    //     console.log(`${event.sender.login} completed something!`)
+    //   }
+    // }
+
+    // const handleIssuesOpenedEvent = (event: IssuesOpenedEvent) => {
+    //   console.log(
+    //     `${event.sender.login} opened "${event.issue.title}" on ${event.repository.full_name}`
+    //   )
+    // }
+
+    github.context.payload = (event: PushEvent) => {
+      event.sender = {
+        ...event.sender,
         login: 'mockUser'
       }
-    } as Webhooks.EventPayloads.WebhookPayloadPush
+    }
+
+    //
+    // BELOW USE OF Webhooks.WebhookPayloadPush IS NO LONGER VALID AFTER @octokit/webhooks v8.x.x.
+    // Use @octokit/webhooks-definitions, see code snippet above and
+    // https://www.npmjs.com/package/@octokit/webhooks-definitions
+    //
+
+    // Mock the payload for event: push
+    // github.context.payload = {
+    //   sender: {
+    //     login: 'mockUser'
+    //   }
+    // } as Webhooks.EventPayloads.WebhookPayloadPush
   })
 
   afterEach(() => {
