@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo npm install --global npm
-        npm install --production
+        npm install
     - name: Licensed
       id: licensed
       run: |

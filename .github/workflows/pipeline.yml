@@ -114,7 +114,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo npm install --global npm
-          npm install
+          npm install --production
       - name: Package
         run: |
           npm run build
