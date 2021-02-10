@@ -1,3 +1,4 @@
+# https://github.com/github/licensed/blob/master/docs/commands.md
 name: "Licensed"
 
 on:
@@ -27,7 +28,6 @@ jobs:
         npm install
     - name: Licensed
       id: licensed
-      # https://github.com/github/licensed/blob/master/docs/commands.md
       run: |
         licensed version
         licensed list -c .licensed.yml
