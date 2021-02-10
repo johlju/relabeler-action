@@ -8,6 +8,7 @@ on: # rebuild any PRs and main branch changes
 
 jobs:
   Build: # make sure build/ci work properly
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,18 +18,13 @@ jobs:
           - windows-latest
         node: [ '12', '14' ]
     steps:
-      - uses: actions/checkout@v2
-      - name: Fetch tags for GitVersion
-        run: git fetch --tags
-      - name: Fetch main for GitVersion (if pull request)
-        if: github.ref != 'refs/heads/main'
-        run: git branch --create-reflog main origin/main
-      - name: Fetch unshallow for GitVersion (if default branch)
-        if: github.ref == 'refs/heads/main'
-        run: git fetch --unshallow
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # 0 indicates all history for all branches and tags
       - name: GitVersion
         id: gitversion  # step id used as reference for output values
-        uses: roryprimrose/rungitversion@master
+        uses: roryprimrose/rungitversion@v1
       - name: Output version values
         run: |
           # These are also available as environment variables, e.g. GitVersion_Major, or GitVersion_NuGetVersionV2
@@ -67,13 +63,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
-          npm install --global npm
+          sudo npm install --global npm
           npm install
           echo $GitVersion_NuGetVersionV2
       - run: |
           npm run all
 
   Test: # run just the tests
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -89,12 +86,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
-          npm install --global npm
+          sudo npm install --global npm
           npm install
       - run: npm run build
       - run: npm test
 
-  Execute: # make sure the action works on a clean machine without building
+  # Make sure the action works on a clean machine without building.
+  # This should be run on branches Releases/* in the future and
+  # 'build run package' should have been run prior.
+  Execute:
+    name: Execute
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -110,6 +111,14 @@ jobs:
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: |
+          sudo npm install --global npm
+          npm install
+      - name: Package
+        run: |
+          npm run build
+          npm run package
       - name: Execute action Relabeler
         uses: ./
         with:
