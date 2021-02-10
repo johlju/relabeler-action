@@ -27,7 +27,13 @@ jobs:
         npm install
     - name: Licensed
       id: licensed
-      uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        workflow: branch
+      # https://github.com/github/licensed/blob/master/docs/commands.md
+      run: |
+        licensed version
+        licensed list -c .licensed.yml
+        licensed cache -c .licensed.yml
+        licensed status -c .licensed.yml
+      # uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
+      # with:
+      #   github_token: ${{ secrets.GITHUB_TOKEN }}
+      #   workflow: branch
