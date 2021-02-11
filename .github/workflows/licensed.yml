@@ -19,9 +19,6 @@ jobs:
       with:
         fetch-depth: 0 # 0 indicates all history for all branches and tags
         #ref: ${{github.ref}} # checkout branch not SHA
-    - name: Install dependencies
-      run: |
-        sudo apt-get install cmake pkg-config
     - name: Setup Licensed
       uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
       with:
