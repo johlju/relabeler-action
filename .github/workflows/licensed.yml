@@ -30,8 +30,9 @@ jobs:
     - name: Licensed
       id: licensed
       run: |
-        tar -xzf licensed.tar.gz
-        rm -f licensed.tar.gz
+        ls -l
+        tar -xzf licensed-2.14.4-linux-x64.tar.gz
+        rm -f licensed-2.14.4-linux-x64.tar.gz
         ./licensed version
       # licensed version
       # licensed list -c .licensed.yml
