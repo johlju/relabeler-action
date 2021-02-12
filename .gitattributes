@@ -1,2 +1,4 @@
 * text=auto eol=lf
-dist/** -diff linguist-generated=true 
+dist/** -diff linguist-generated=true
+
+*.tar.gz binary

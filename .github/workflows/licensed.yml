@@ -19,10 +19,10 @@ jobs:
       with:
         fetch-depth: 0 # 0 indicates all history for all branches and tags
         #ref: ${{github.ref}} # checkout branch not SHA
-    - name: Setup Licensed
-      uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
-      with:
-        version: 2.x
+    # - name: Setup Licensed
+    #   uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
+    #   with:
+    #     version: 2.x
     - name: Install build dependencies
       run: |
         sudo npm install --global npm
@@ -30,10 +30,13 @@ jobs:
     - name: Licensed
       id: licensed
       run: |
-        licensed version
-        licensed list -c .licensed.yml
-        licensed cache -c .licensed.yml
-        licensed status -c .licensed.yml
+        tar -xzf licensed.tar.gz
+        rm -f licensed.tar.gz
+        ./licensed version
+      # licensed version
+      # licensed list -c .licensed.yml
+      # licensed cache -c .licensed.yml
+      # licensed status -c .licensed.yml
       # uses: jonabc/licensed-ci@v1 # https://github.com/marketplace/actions/licensed-ci, runs https://github.com/github/licensed
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
