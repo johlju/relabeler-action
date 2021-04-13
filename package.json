@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
+  "name": "relabeler-action",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Relabeler action",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -40,7 +40,7 @@
     "eslint-plugin-github": "^4.1.3",
     "eslint-plugin-jest": "^24.3.5",
     "jest": "^26.0.20",
-    "jest-circus": "^26.5.3",
+    "jest-circus": "^26.6.3",
     "js-yaml": "^4.0.0",
     "prettier": "2.2.1",
     "ts-jest": "^26.5.4",
