@@ -45,3 +45,10 @@ Github workflow is automatically disabled after 60 days of repository inactivity
 GitHub Webhooks events and payloads
 
 - https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/webhook-events-and-payloads#pushevent
+
+@octokit/webhooks-definitions is now deprecated
+
+- https://github.com/octokit/webhooks/issues/447
+  - https://github.com/octokit/webhooks/tree/master/payload-examples#readme
+  - https://github.com/octokit/webhooks/tree/master/payload-types#readme
+  - https://github.com/octokit/webhooks/tree/master/payload-schemas#readme

@@ -10,7 +10,8 @@ import {
   //WebhookEvent,
   PushEvent
   //IssuesOpenedEvent
-} from '@octokit/webhooks-definitions/schema'
+} from '@octokit/webhooks-types'
+
 import run from '../src/main'
 
 describe('When calling action without mandatory parameters', () => {
