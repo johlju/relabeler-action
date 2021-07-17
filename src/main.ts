@@ -100,7 +100,8 @@ async function run(): Promise<void> {
     ) {
       const issue = github.context.payload.issue
 
-      const issueCommentResponse = await octokit.issues.createComment({
+      //Created to will trigger abuse rate limit. See https://docs.github.com/en/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits.
+      const issueCommentResponse = await octokit.rest.issues.createComment({
         owner,
         repo,
         issue_number: issue.number,
