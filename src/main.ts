@@ -1,3 +1,4 @@
+/* eslint-disable i18n-text/no-en */
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {wait} from './wait'
@@ -142,7 +143,7 @@ async function run(): Promise<void> {
 
     // You should use this library to set the failing exit code for your action.
     // If status is not set and the script runs to completion, that will lead to a success.
-    core.setFailed(error.message)
+    if (error instanceof Error) core.setFailed(error.message)
   }
 }
 

@@ -1,10 +1,11 @@
+/* eslint-disable i18n-text/no-en */
 // Needed for test 'When executing as a process'
-import * as process from 'process'
-import * as cp from 'child_process'
-import * as path from 'path'
-
 import * as core from '@actions/core'
+import * as cp from 'child_process'
 import * as github from '@actions/github'
+import * as path from 'path'
+import * as process from 'process'
+
 //import * as Webhooks from '@octokit/webhooks'
 import {
   //WebhookEvent,

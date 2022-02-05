@@ -1,6 +1,19 @@
 {
-    "plugins": ["jest", "@typescript-eslint"],
-    "extends": ["plugin:github/recommended"],
+    "settings": {
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"]
+      },
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        },
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      }
+    },
+    "plugins": ["jest", "@typescript-eslint", "import"],
+    "extends": ["plugin:github/recommended", "eslint:recommended", "plugin:import/recommended", "plugin:import/typescript"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 9,
@@ -44,7 +57,9 @@
       "semi": "off",
       "@typescript-eslint/semi": ["error", "never"],
       "@typescript-eslint/type-annotation-spacing": "error",
-      "@typescript-eslint/unbound-method": "error"
+      "@typescript-eslint/unbound-method": "error",
+      "import/no-unresolved": "error",
+      "filenames/match-regex": [2, "^[a-z_\\.]+$", true]
     },
     "env": {
       "node": true,
