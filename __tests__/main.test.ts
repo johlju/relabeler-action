@@ -131,7 +131,8 @@ describe('When executing as a process', () => {
     const options: cp.ExecFileSyncOptions = {
       env: process.env
     }
-    cp.execFileSync(np, [ip], options)
+    const output = cp.execFileSync(np, [ip], options).toString()
+    expect(output).toMatch(/::debug::Waiting 500 milliseconds .../i)
     //console.log(cp.execFileSync(np, [ip], options).toString())
   })
 })
