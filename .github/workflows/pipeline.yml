@@ -62,11 +62,14 @@ jobs:
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
-      - run: |
+      - name: Install npm@latest
+        run: |
           sudo curl -qL https://www.npmjs.com/install.sh | sh
-      - run: |
+      - name: Install package dependencies
+        run: |
           npm install
-      - run: |
+      - name: Output Relabeler semantic version
+        run: |
           echo $GitVersion_NuGetVersionV2
       - run: |
           npm run all
