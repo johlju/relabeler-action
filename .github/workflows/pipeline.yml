@@ -65,7 +65,7 @@ jobs:
       - name: Install npm@latest
         run: |
           sudo curl -qL https://www.npmjs.com/install.sh | sh
-      - name: Install package dependencies
+      - name: Install dependencies
         run: |
           npm install
       - name: Output Relabeler semantic version
@@ -116,11 +116,13 @@ jobs:
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
+      - name: Install npm@latest
+        run: |
+          sudo curl -qL https://www.npmjs.com/install.sh | sh
       - name: Install dependencies
         run: |
-          sudo npm install --global npm
           npm install
-      - name: Package
+      - name: Build & Package
         run: |
           npm run build
           npm run package
