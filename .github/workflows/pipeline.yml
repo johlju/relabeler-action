@@ -63,7 +63,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
-          sudo npm install --global npm
+          sudo npm install --global npm@latest
           npm install
           echo $GitVersion_NuGetVersionV2
       - run: |
