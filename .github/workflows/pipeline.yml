@@ -63,9 +63,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: |
-          sudo npm update npm
-          sudo npm install --global npm@latest
+          sudo npm install --global npm@8.5.0
+      - run: |
           npm install
+      - run: |
           echo $GitVersion_NuGetVersionV2
       - run: |
           npm run all
