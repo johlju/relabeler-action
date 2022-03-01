@@ -59,7 +59,7 @@ jobs:
           echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.CommitDate }}"
       - name: Setup node v${{ matrix.node }}
-        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
       - name: Install npm@latest
@@ -87,7 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup node v${{ matrix.node }}
-        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
       - run: |
@@ -113,7 +113,7 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Setup node v${{ matrix.node }}
-        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
       - name: Install npm@latest
