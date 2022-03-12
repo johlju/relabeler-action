@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Relabeler action",
-  "main": "lib/main.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "build-watch": "tsc --watch",
