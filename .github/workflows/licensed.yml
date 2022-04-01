@@ -19,23 +19,16 @@ jobs:
       with:
         fetch-depth: 0 # 0 indicates all history for all branches and tags
         #ref: ${{github.ref}} # checkout branch not SHA      
-
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-
-      # install licensed gem using setup-licensed
-      - name: Setup Licensed
-        uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
-        with:
-          version: '3.x'
-
-      # install dependencies in CI environment
-      - run: bundle install
-
-      # run licensed-ci to cache any metadata changes and verify compliance
-      - uses: jonabc/licensed-ci@v1
+    - name: Install Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+    - name: Setup Licensed # install licensed gem using setup-licensed
+      uses: jonabc/setup-licensed@v1 # https://github.com/marketplace/actions/setup-github-licensed
+      with:
+        version: '3.x'
+    - run: bundle install # install dependencies in CI environment
+    - uses: jonabc/licensed-ci@v1 # run licensed-ci to cache any metadata changes and verify compliance
         
     # - name: Install build dependencies
     #   run: |
