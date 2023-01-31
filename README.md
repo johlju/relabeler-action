@@ -1,5 +1,9 @@
 # Relabeler
 
+[![Check dist](https://github.com/johlju/relabeler-action/actions/workflows/check-dist.yml/badge.svg?branch=main)](https://github.com/johlju/relabeler-action/actions/workflows/check-dist.yml)
+[![CodeQL](https://github.com/johlju/relabeler-action/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/johlju/relabeler-action/actions/workflows/codeql-analysis.yml)
+[![Pipeline](https://github.com/johlju/relabeler-action/actions/workflows/pipeline.yml/badge.svg?branch=main)](https://github.com/johlju/relabeler-action/actions/workflows/pipeline.yml)
+
 _Based on the template [typescript-action](https://github.com/actions/typescript-action)_.
 
 ## Contribute
