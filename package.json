@@ -11,9 +11,9 @@
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint **/*.ts && npm run format-check",
     "package": "ncc build --source-map --no-cache --license licenses.txt",
-    "test": "jest --coverage && npm run lint",
+    "test": "jest --coverage",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
-    "all": "npm run build && npm run package && npm test"
+    "all": "npm run build && npm run package && npm run lint && npm test"
   },
   "repository": {
     "type": "git",
