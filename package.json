@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Relabeler action",
-  "main": "dist/main.js",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc --newLine lf",
     "build-watch": "tsc --watch --sourceMap --newLine lf",
