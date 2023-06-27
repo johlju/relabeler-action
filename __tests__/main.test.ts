@@ -1,4 +1,3 @@
-/* eslint-disable i18n-text/no-en */
 // Needed for test 'When executing as a process'
 import * as core from '@actions/core'
 import * as cp from 'child_process'
