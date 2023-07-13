@@ -42,10 +42,10 @@ describe('debug action debug messages', () => {
     jest.resetModules()
 
     // Set input environment variables
-    process.env['INPUT_MILLISECONDS'] = '500'
-    process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
-    process.env['GITHUB_EVENT_NAME'] = 'push'
-    process.env['GITHUB_EVENT_PATH'] =
+    process.env.INPUT_MILLISECONDS = '500'
+    process.env.INPUT_REPOSITORYTOKEN = 'AnyValue'
+    process.env.GITHUB_EVENT_NAME = 'push'
+    process.env.GITHUB_EVENT_PATH =
       '/home/runner/work/_temp/_github_workflow/event.json'
 
     // Uses @octokit/webhooks-definitions for Type Script types for webhook events
@@ -85,10 +85,10 @@ describe('debug action debug messages', () => {
 
   afterEach(() => {
     // Remove input environment variables
-    delete process.env['INPUT_MILLISECONDS']
-    delete process.env['INPUT_REPOSITORYTOKEN']
-    delete process.env['GITHUB_EVENT_NAME']
-    delete process.env['GITHUB_EVENT_PATH']
+    delete process.env.INPUT_MILLISECONDS
+    delete process.env.INPUT_REPOSITORYTOKEN
+    delete process.env.GITHUB_EVENT_NAME
+    delete process.env.GITHUB_EVENT_PATH
   })
 
   it('Should not throw an error and call the correct mock', async () => {
@@ -106,25 +106,25 @@ describe('When executing as a process', () => {
     jest.resetModules()
 
     // Set input environment variables
-    process.env['INPUT_MILLISECONDS'] = '500'
-    process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
-    process.env['GITHUB_EVENT_NAME'] = 'push'
-    process.env['GITHUB_EVENT_PATH'] =
+    process.env.INPUT_MILLISECONDS = '500'
+    process.env.INPUT_REPOSITORYTOKEN = 'AnyValue'
+    process.env.GITHUB_EVENT_NAME = 'push'
+    process.env.GITHUB_EVENT_PATH =
       '/home/runner/work/_temp/_github_workflow/event.json'
   })
 
   afterAll(() => {
     // Remove input environment variables
-    delete process.env['INPUT_MILLISECONDS']
-    delete process.env['INPUT_REPOSITORYTOKEN']
-    delete process.env['GITHUB_EVENT_NAME']
-    delete process.env['GITHUB_EVENT_PATH']
+    delete process.env.INPUT_MILLISECONDS
+    delete process.env.INPUT_REPOSITORYTOKEN
+    delete process.env.GITHUB_EVENT_NAME
+    delete process.env.GITHUB_EVENT_PATH
   })
 
   // shows how the runner will run a javascript action with env / stdout protocol
   it('Should not throw an error', () => {
-    process.env['INPUT_MILLISECONDS'] = '500'
-    process.env['INPUT_REPOSITORYTOKEN'] = 'AnyValue'
+    process.env.INPUT_MILLISECONDS = '500'
+    process.env.INPUT_REPOSITORYTOKEN = 'AnyValue'
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
     const options: cp.ExecFileSyncOptions = {

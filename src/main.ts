@@ -9,14 +9,14 @@ async function run(): Promise<void> {
     // Always set to true when GitHub Actions is running the workflow.
     // You can use this variable to differentiate when tests are being run
     // locally or by GitHub Actions.
-    const isGitHubActions = process.env['GITHUB_ACTIONS']
+    const isGitHubActions = process.env.GITHUB_ACTIONS
 
     // The name of the webhook event that triggered the workflow.
-    const webHookEventName = process.env['GITHUB_EVENT_NAME'] || ''
+    const webHookEventName = process.env.GITHUB_EVENT_NAME ?? ''
 
     // The path of the file with the complete webhook event payload.
     // For example, /github/workflow/event.json.
-    const webHookEventPath = process.env['GITHUB_EVENT_PATH'] || ''
+    const webHookEventPath = process.env.GITHUB_EVENT_PATH ?? ''
 
     let runningMessage = ''
 
@@ -24,7 +24,7 @@ async function run(): Promise<void> {
       runningMessage = dryRunMessage
     }
 
-    const gitHubActor = process.env['GITHUB_ACTOR']
+    const gitHubActor = process.env.GITHUB_ACTOR
     if (gitHubActor) {
       runningMessage = `${runningMessage}Running the action Relabeler due to generated event '${webHookEventName}' by user @${gitHubActor}.`
     } else {
@@ -36,7 +36,7 @@ async function run(): Promise<void> {
     core.info(webHookEventPath)
 
     if (github.context.payload.sender) {
-      const senderLogin = github.context.payload.sender.login
+      const senderLogin = github.context.payload.sender.login as string
 
       if (senderLogin) {
         core.debug(`A push from ${senderLogin}!`)
@@ -62,7 +62,7 @@ async function run(): Promise<void> {
     const result = await core.group(
       'Do the wait async in a group',
       async () => {
-        wait(parseInt(ms, 10))
+        await wait(parseInt(ms, 10))
         return 1
       }
     )
@@ -88,7 +88,7 @@ async function run(): Promise<void> {
     // Usage: https://github.com/actions/toolkit/tree/main/packages/github#usage
     const octokit = github.getOctokit(repositoryToken)
 
-    const nwo = process.env['GITHUB_REPOSITORY'] || '/'
+    const nwo = process.env.GITHUB_REPOSITORY ?? '/'
     const [owner, repo] = nwo.split('/')
 
     core.debug(`action: ${github.context.payload.action}`)
@@ -146,7 +146,7 @@ async function run(): Promise<void> {
   }
 }
 
-run()
+void run()
 
 // Export function run as the default export.
 // This is not required but writing the tests are easier.

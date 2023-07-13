@@ -30,7 +30,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-/* eslint-disable i18n-text/no-en */
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const wait_1 = __nccwpck_require__(5817);
@@ -40,17 +39,17 @@ async function run() {
         // Always set to true when GitHub Actions is running the workflow.
         // You can use this variable to differentiate when tests are being run
         // locally or by GitHub Actions.
-        const isGitHubActions = process.env['GITHUB_ACTIONS'];
+        const isGitHubActions = process.env.GITHUB_ACTIONS;
         // The name of the webhook event that triggered the workflow.
-        const webHookEventName = process.env['GITHUB_EVENT_NAME'] || '';
+        const webHookEventName = process.env.GITHUB_EVENT_NAME ?? '';
         // The path of the file with the complete webhook event payload.
         // For example, /github/workflow/event.json.
-        const webHookEventPath = process.env['GITHUB_EVENT_PATH'] || '';
+        const webHookEventPath = process.env.GITHUB_EVENT_PATH ?? '';
         let runningMessage = '';
         if (!isGitHubActions) {
             runningMessage = dryRunMessage;
         }
-        const gitHubActor = process.env['GITHUB_ACTOR'];
+        const gitHubActor = process.env.GITHUB_ACTOR;
         if (gitHubActor) {
             runningMessage = `${runningMessage}Running the action Relabeler due to generated event '${webHookEventName}' by user @${gitHubActor}.`;
         }
@@ -78,7 +77,7 @@ async function run() {
         core.endGroup();
         // Wrap an asynchronous function call in a foldable group
         const result = await core.group('Do the wait async in a group', async () => {
-            (0, wait_1.wait)(parseInt(ms, 10));
+            await (0, wait_1.wait)(parseInt(ms, 10));
             return 1;
         });
         core.info(`Returned ${result} from group`);
@@ -98,7 +97,7 @@ async function run() {
         const repositoryToken = core.getInput('repositoryToken');
         // Usage: https://github.com/actions/toolkit/tree/main/packages/github#usage
         const octokit = github.getOctokit(repositoryToken);
-        const nwo = process.env['GITHUB_REPOSITORY'] || '/';
+        const nwo = process.env.GITHUB_REPOSITORY ?? '/';
         const [owner, repo] = nwo.split('/');
         core.debug(`action: ${github.context.payload.action}`);
         if (isGitHubActions &&
@@ -144,7 +143,7 @@ async function run() {
             core.setFailed(error.message);
     }
 }
-run();
+void run();
 // Export function run as the default export.
 // This is not required but writing the tests are easier.
 exports["default"] = run;
